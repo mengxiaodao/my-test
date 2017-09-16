@@ -8,14 +8,15 @@
 	<resultMap type="org.andy.shop.model.User" id="UserResult">    
 	    <id column="id" property="id"/>    
 	    <result column="user_name" property="userName"/>    
-	    <result column="pass_word" property="passWord"/>  
+	    <result column="password" property="passWord"/>  
 	    <result column="real_name" property="realName"/> 
-	    <result column="user_mobile" property="userMobile"/>    
+	    <result column="tel" property="tel"/>    
 	    <result column="create_time" property="createTime"/> 
+	    <result column="update_time" property="updateTime"/>
 	</resultMap>   
    
   	 <!--  查询所有用户list-->
 	<select id="getAllUsers"  resultMap="UserResult">    
-	      select * from sys_user   
+	      select * from f_user   
 	</select> 
 </mapper>
