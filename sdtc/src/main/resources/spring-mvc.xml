@@ -67,7 +67,11 @@
     
     <mvc:interceptors>  
         <mvc:interceptor>  
-            <mvc:mapping path="/**"/>    <!-- /** 表示所有的url，包括子url路径 --> 
+           <!--  <mvc:mapping path="/**" />    /** 表示所有的url，包括子url路径  -->
+           
+            <mvc:mapping path="/" /><!-- 我这里边是对方法分开进行拦截的 -->  
+            <mvc:mapping path="/clientLogin/**" />  <!--拦截clientLogin下所有接口  -->
+            <mvc:exclude-mapping path="/clientLogin/login.do" /> <!--忽略登录接口，不拦截-->
             <bean class="org.andy.shop.interceptor.LoginInterceptor"></bean>  
         </mvc:interceptor>  
         <!-- 可以配置多个拦截器顺序执行 -->

@@ -8,7 +8,10 @@
 </head>
 <body>
 
-    <p>${myName}</p>
+     当前用户:${user.userName}  
+    <c:if test="${not empty user}">  
+        <a href="<%=request.getContextPath()%>/clientLogin/logout.do">退出</a>  
+    </c:if>  
 
 </body>
 </html>

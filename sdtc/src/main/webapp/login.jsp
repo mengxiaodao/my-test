@@ -6,20 +6,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>学生信息管理系统登录</title>
-<script type="text/javascript">
-	function resetValue(){
-		document.getElementById("userName").value="";
-		document.getElementById("password").value="";
-	}
-	
-	function loadimage(){
-		document.getElementById("randImage").src = "image.jsp?"+Math.random();
-	}
-</script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.8.3.min.js"></script>
 </head>
 <body>
 	<div align="center" style="padding-top: 50px;">
-		<form action="<%=request.getContextPath()%>/clientLogin/login.do" method="post">
 			<table  width="740" height="500" background="<%=request.getContextPath()%>/images/tongren_login.jpg" >
 				<tr height="180">
 					<td colspan="4"></td>
@@ -27,7 +17,9 @@
 				<tr height="10">
 					<td width="40%"></td>
 					<td width="10%">用户名：</td>
-					<td><input type="text" value="yuan" name="userName" id="userName"/></td>
+					<td>
+						<input type="text" value="yuan" name="userName" id="userName"/>
+					</td>
 					<td width="30%"></td>
 				</tr>
 				<tr height="10">
@@ -38,8 +30,12 @@
 				</tr>
 				<tr height="10">
 					<td width="40%"></td>
-					<td width="10%"><input type="submit" value="登录"/></td>
-					<td><input type="button" value="重置" onclick="resetValue()"/></td>
+					<td width="10%">
+						<input type="button" value="登录" onclick="loginUser()"/>
+					</td>
+					<td><input type="button" value="重置" onclick="resetValue()"/>&nbsp;&nbsp;&nbsp;
+						<span style="color:red"  id="errorMsg"></span>
+					</td>
 					<td width="30%"></td>
 				</tr>
 				<tr height="10">
@@ -52,7 +48,32 @@
 					<td></td>
 				</tr>
 			</table>
-		</form>
 	</div>
 </body>
+<script type="text/javascript">
+	var ctx = '${pageContext.request.contextPath}';
+	function loginUser(){
+		var userName = $.trim($("#userName").val());
+		var password = $.trim($("#password").val());
+		 $.ajax({
+	            type:"POST",
+	            url: ctx + "/clientLogin/login.do",
+	            data:{userName:userName,password:password},
+	            //成功返回之后调用的函数             
+	            success:function(data){
+	          		 var result = data;
+	          		 console.log(result);
+	          		 if(result.status){
+	          			 window.location.href = ctx + "/clientLogin/index.do";
+	          		 }else{
+	          			 $('#errorMsg').text(result.message); 
+	          		 }
+	            },
+	            //调用出错执行的函数
+	            error: function(){
+	                alert("登录出错");
+	            }         
+	         });
+	}
+</script>
 </html>

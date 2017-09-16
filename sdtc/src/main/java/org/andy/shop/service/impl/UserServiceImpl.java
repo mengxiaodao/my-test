@@ -16,8 +16,12 @@ public class UserServiceImpl implements UserService{
 	//获取所有用户list
 	@Override
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
 		return userMapper.getAllUsers();
+	}
+	// 根据用户名userName，查询用户
+	@Override
+	public User getUserByUserName(String userName) {
+		return userMapper.getUserByUserName(userName);
 	}
 
 }

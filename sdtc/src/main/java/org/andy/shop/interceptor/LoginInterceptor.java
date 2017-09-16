@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.andy.shop.model.User;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 /**
@@ -36,18 +37,19 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
 			Object handler) throws Exception {
-		//获取请求的URL  
+		 /*//获取请求的URL  
         String url = request.getRequestURI();  
-        
-        //URL:login.jsp是公开的，这个demo是除了login提交url是可以公开访问的，其它的URL都进行拦截控制  
+       //URL:login.jsp是公开的，这个demo是除了login提交url是可以公开访问的，其它的URL都进行拦截控制  
+        //注册用户
         if(url.indexOf("login.do")>=0){  
             return true;  
-        }  
+        }  */
+		
         //获取Session，当前会话
         HttpSession session = request.getSession();  
-        String userName = (String)session.getAttribute("userName");  
+        User user = (User) session.getAttribute("user");  
         //当前用户登录，返回true
-        if(userName != null){  
+        if(user != null){  
             return true;  
         }  
         //不符合条件的，跳转到登录界面  ，进行登录

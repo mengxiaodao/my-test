@@ -5,7 +5,7 @@
 <mapper namespace="org.andy.shop.mapping.UserMapper" >
 	
 	<!--映射数据库字段 ,column数据库字段，property实体类属性 -->
-	<resultMap type="org.andy.shop.model.User" id="UserResult">    
+	<resultMap type="org.andy.shop.model.User" id="UserResultMap">    
 	    <id column="id" property="id"/>    
 	    <result column="user_name" property="userName"/>    
 	    <result column="password" property="passWord"/>  
@@ -16,7 +16,13 @@
 	</resultMap>   
    
   	 <!--  查询所有用户list-->
-	<select id="getAllUsers"  resultMap="UserResult">    
+	<select id="getAllUsers"  resultMap="UserResultMap">    
 	      select * from f_user   
 	</select> 
+	
+	<!-- 根据用户名userName，查询用户 -->
+	<select id="getUserByUserName" resultMap="UserResultMap" parameterType="java.lang.String" >  
+	    SELECT * FROM f_user  WHERE user_name = #{userName}  
+ 	</select>  
+ 	
 </mapper>
