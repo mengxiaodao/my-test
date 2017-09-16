@@ -28,7 +28,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/login.do")
 	@ResponseBody
-	public Result login(HttpSession session,String userName,String password) throws Exception{
+	public Result login(HttpSession session,String userName,String password,User u) throws Exception{
 		Result result = new Result();
 		if (StringUtils.isEmpty(userName) || StringUtils.isEmpty(password)) {
 			result.set("用户名或密码不能为空", false);
@@ -38,7 +38,7 @@ public class LoginController {
 		User user = userService.getUserByUserName(userName);
 		if (user != null) {
 			//密码不匹配，返回密码错误
-			if (!password.equals(user.getPassWord())) {
+			if (!password.equals(user.getPassword())) {
 				result.set("密码错误", false);
 				return result;
 			}else {

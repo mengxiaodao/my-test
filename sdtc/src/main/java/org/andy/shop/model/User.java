@@ -6,7 +6,7 @@ import java.util.Date;
 public class User {
 	private Long id;//用户id
 	private String userName; // 用户名
-	private String passWord; // 密码
+	private String password; // 密码
 	private String realName;//真实姓名
 	private String tel; // 用户电话
 	private Date createTime; // 创建时间
@@ -24,11 +24,12 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getPassWord() {
-		return passWord;
+	
+	public String getPassword() {
+		return password;
 	}
-	public void setPassWord(String passWord) {
-		this.passWord = passWord;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	public String getRealName() {
 		return realName;
