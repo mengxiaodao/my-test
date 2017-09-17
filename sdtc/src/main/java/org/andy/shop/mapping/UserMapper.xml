@@ -17,12 +17,12 @@
    
   	 <!--  查询所有用户list-->
 	<select id="getAllUsers"  resultMap="UserResultMap">    
-	      select * from f_user   
+	      select * from s_user   
 	</select> 
 	
 	<!-- 根据用户名userName，查询用户 -->
 	<select id="getUserByUserName" resultMap="UserResultMap" parameterType="java.lang.String" >  
-	    SELECT * FROM f_user  WHERE user_name = #{userName}  
+	    SELECT * FROM s_user  WHERE user_name = #{userName}  
  	</select>  
  	
 </mapper>
