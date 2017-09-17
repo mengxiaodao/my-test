@@ -19,14 +19,14 @@
 					<td width="40%"></td>
 					<td width="10%">用户名：</td>
 					<td>
-						<input type="text" value="yuan" name="userName" id="userName"/>
+						<input type="text" value="" name="userName" id="userName"/>
 					</td>
 					<td width="30%"></td>
 				</tr>
 				<tr height="10">
 					<td width="40%"></td>
 					<td width="10%">密  码：</td>
-					<td><input type="password" value="123456" name="password" id="password"/></td>
+					<td><input type="password" value="" name="password" id="password"/></td>
 					<td width="30%"></td>
 				</tr>
 				<tr height="10">

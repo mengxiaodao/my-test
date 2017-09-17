@@ -53,7 +53,8 @@
 								<i class="icon-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">安居客控制台</li>
+							<li class="active">${parentMenuName}</li>
+							<li class="active">${menuName}</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -63,19 +64,9 @@
 								<!-- PAGE CONTENT BEGINS -->
 
 								<div class="alert alert-block alert-success">
-									<button type="button" class="close" data-dismiss="alert">
-										<i class="icon-remove"></i>
-									</button>
-
-									<i class="icon-ok green"></i>
-
-									欢迎使用
-									<strong class="green">
-										安居客房源系统
-									<small>(v1.2)</small>
-									</strong>
-									,这里为你提供更更全面的房源信息管理.	
-							  </div>
+									
+									展示用户列表
+							  	</div>
 							</div>
 						</div>
 					</div><!-- /.page-content -->
@@ -283,11 +274,11 @@
 				if(this.checked) $(this).closest('li').addClass('selected');
 				else $(this).closest('li').removeClass('selected');
 			});
-			/* //点击当前li标签变高亮色，其他的变回原色
+			 //点击当前li标签变高亮色，其他的变回原色
 			$("ul#navList li").click(function(){
-				$(this).siblings().removeClass("active");
+				//$(this).siblings().removeClass("active");
 			    $(this).addClass("active");
-		    }); */
+		    });
 		});
 	</script>
 </body>
