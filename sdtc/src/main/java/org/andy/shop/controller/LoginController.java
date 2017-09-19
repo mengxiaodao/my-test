@@ -1,4 +1,7 @@
 package org.andy.shop.controller;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -59,9 +62,9 @@ public class LoginController {
 	 */
 	@RequestMapping("/index.do")
 	public ModelAndView  pageInit(HttpSession session){
-		ModelAndView mav = new ModelAndView();  
-		mav.setViewName("/index/index"); //返回的文件名 
-		return mav;
+		Map<String, Object> map = new HashMap<>();
+		map.put("11", "11");
+		return new ModelAndView("/index/index",map);
 	}
 	/**
 	*@autho mc
