@@ -16,7 +16,7 @@
 
 	<body>
 		
-		dahsihdaihsidihds
+		dahsihdaihsidihds ${name }
 </body>
 </html>
 

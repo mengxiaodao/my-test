@@ -63,7 +63,7 @@ public class LoginController {
 	@RequestMapping("/main.do")
 	public ModelAndView  pageInit(HttpSession session){
 		Map<String, Object> map = new HashMap<>();
-		map.put("11", "11");
+		map.put("name", "11");
 		return new ModelAndView("/index/main",map);
 	}
 	/**
