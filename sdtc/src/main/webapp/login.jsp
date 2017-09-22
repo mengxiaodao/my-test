@@ -6,12 +6,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>学生信息管理系统登录</title>
-<!-- <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.9.0.min.js"></script> -->
-<script type="text/javascript" src="../js/jquery-1.9.0.min.js"></script> <!-- 当前目录 -->
+ <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.9.0.min.js"></script> 
 </head>
 <body>
 	<div align="center" style="padding-top: 50px;">
-			<table  width="740" height="500" background="../images/tongren_login.jpg" >
+			<table  width="740" height="500" background="<%=request.getContextPath()%>/images/tongren_login.jpg" >
 				<tr height="180">
 					<td colspan="4"></td>
 				</tr>
@@ -66,7 +65,7 @@
 	          		 console.log(result);
 	          		 if(result.status){
 	          			 //登录成功，跳转主页
-	          			 window.location.href = ctx + "/clientLogin/index.do";
+	          			 window.location.href = ctx + "/clientLogin/main.do";
 	          		 }else{
 	          			 $('#errorMsg').text(result.message); 
 	          		 }

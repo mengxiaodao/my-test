@@ -60,11 +60,11 @@ public class LoginController {
 	*@date 2017年9月16日 下午9:08:23 
 	*@Description: 登录成功，跳转主页
 	 */
-	@RequestMapping("/index.do")
+	@RequestMapping("/main.do")
 	public ModelAndView  pageInit(HttpSession session){
 		Map<String, Object> map = new HashMap<>();
 		map.put("11", "11");
-		return new ModelAndView("/index/index",map);
+		return new ModelAndView("/index/main",map);
 	}
 	/**
 	*@autho mc
