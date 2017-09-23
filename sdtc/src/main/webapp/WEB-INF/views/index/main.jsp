@@ -24,7 +24,7 @@
 				{
 					text:"铜仁新闻信息管理",
 					attributes:{
-						url:"news.jsp"
+						url:"../userManage/pageInit.do"
 					}
 				},
 				{
