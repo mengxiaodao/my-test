@@ -12,6 +12,9 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 
 <script type="text/javascript">
+	/* 我理解的应该是，由于是iframe的页面，所以需要在子页面调用父页面的close方法去关闭panel
+	window.parent.$('#tt').tabs('close','修改日志1'); 
+	*/
 	var url;
 	function deleteNews(){
 		var selectedRows=$("#dg").datagrid('getSelections');
@@ -39,12 +42,14 @@
 	}
 
 	function searchNews(){
-		alert("test search");
+		
+		//window.parent.$('#tabs').tabs('close','铜仁新闻信息管理'); //调用父窗口的关闭tab选显卡方法
+		window.parent.openTab("qqqq","wwwww"); //调用父窗口的openTab方法
+		
 		$('#dg').datagrid('load',{
 			s_title:$('#s_title').val()
 		}); 
 	}
-	
 	
 	function openNewsAddDialog(){
 		$("#dlg").dialog("open").dialog("setTitle","添加新闻信息");

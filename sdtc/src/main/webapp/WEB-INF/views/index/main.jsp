@@ -46,7 +46,6 @@
 				}
 				]
 			}];
-			
 			// 实例化树菜单
 			$("#tree").tree({
 				data:treeData,
@@ -57,21 +56,34 @@
 					}
 				}
 			});
-			
-			// 新增Tab
-			function openTab(text,url){
-				if($("#tabs").tabs('exists',text)){
-					$("#tabs").tabs('select',text);
-				}else{
-					var content="<iframe frameborder='0' scrolling='auto' style='width:100%;height:100%' src="+url+"></iframe>";
-					$("#tabs").tabs('add',{
-						title:text,
-						closable:true,
-						content:content
-					});
-				}
-			}
 		});
+		
+		// 新增Tab方法
+		function openTab(text,url){
+			if($("#tabs").tabs('exists',text)){
+				$("#tabs").tabs('select',text);
+			}else{
+				var content="<iframe frameborder='0' scrolling='auto' style='width:100%;height:100%' src="+url+"></iframe>";
+				$("#tabs").tabs('add',{
+					title:text, //tab的title
+					closable:true, //显示关闭控件
+					content:content, //下面内容
+				 	tools:[{
+							iconCls:'icon-reload',
+							handler:function(){  //刷新当前tab
+								var current_tab = $('#tabs').tabs('getSelected'); //当前tab
+								$('#tabs').tabs('update',{
+								     tab:current_tab,
+								     options : {
+							       		href : ''
+							       		//或者content : "<iframe frameborder='0' scrolling='auto' style='width:100%;height:100%' src="+url+"></iframe>",
+								     }
+								});
+							}
+					    }]
+				});
+			}
+		}
 	</script>
 </head>
 <body class="easyui-layout">
@@ -80,6 +92,8 @@
 		<div style="padding-top: 50px;padding-right: 20px;">当前用户：&nbsp;<font color="red" >${currentUser.userName }</font></div>
 		
 	</div>
+	
+	<!--新增tab页面  -->
 	<div region="center">
 		<div class="easyui-tabs" fit="true" border="false" id="tabs">
 			<div title="首页" >
@@ -87,6 +101,8 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- 树形菜单 -->
 	<div region="west" style="width: 150px;" title="导航菜单" split="true">
 		<ul id="tree"></ul>
 	</div>
