@@ -8,12 +8,12 @@
 	<title>信息管理系统</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<!-- basic styles -->
-	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.3.3/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="../jquery-easyui-1.3.3/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jquery-easyui-1.3.3/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jquery-easyui-1.3.3/themes/icon.css">
 	
-	<script type="text/javascript" src="../jquery-easyui-1.3.3/jquery.min.js"></script>
-	<script type="text/javascript" src="../jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="../jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery-easyui-1.3.3/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 
 	<script type="text/javascript">
 		$(function(){
@@ -76,7 +76,7 @@
 </head>
 <body class="easyui-layout">
 	<div region="north" style="height: 80px;background-color: #E0EDFF">
-		<div align="left" style="width: 80%;float: left"><img src="images/tongren_main.png"></div>
+		<div align="left" style="width: 80%;float: left"><img src="../images/tongren_main.png"></div>
 		<div style="padding-top: 50px;padding-right: 20px;">当前用户：&nbsp;<font color="red" >${currentUser.userName }</font></div>
 		
 	</div>
