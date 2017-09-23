@@ -105,67 +105,71 @@
 	}
 </script>
 </head>
-<body style="margin: 5px;">
-	<table id="dg" title="新闻信息" class="easyui-datagrid" fitColumns="true"
-	 pagination="true" rownumbers="true" url="" fit="true" toolbar="#tb">
-		<thead>
-			<tr>
-				<th field="cb" checkbox="true"></th>
-				<th field="news_id" width="50" align="center">编号</th>
-				<th field="role" width="100" align="center">新闻类别</th>
-				
-				<th field="title" width="250" align="center" >新闻标题</th>
-				<th field="content"  width="250" align="center">新闻内容</th>
-				<th field="date" width="100" align="center">发布日期</th>
-				
-			</tr>
-		</thead>
-	</table>
-	
-	<div id="tb">
-		<div>
-			<a href="javascript:openNewsAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
-			<a href="javascript:openNewsModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
-			<a href="javascript:deleteNews()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+<body >
+	<div style="margin-top: 15px;" class="easyui-panel">
+		
+		<div id="tb">
+			<div>
+				<a href="javascript:openNewsAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
+				<a href="javascript:openNewsModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
+				<a href="javascript:deleteNews()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
+			</div>
+			<div>
+		   &nbsp;标题：&nbsp;<input type="text" name="s_title" id="s_title" size="10"/>
+		
+			<a href="javascript:searchNews()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
+			<span>（注：新闻类别中，“1”代表“动态”，“2”代表“要闻”，“3”代表“资讯”，“4”代表“公告”。）</span>
+			</div>
 		</div>
-		<div>
-	   &nbsp;标题：&nbsp;<input type="text" name="s_title" id="s_title" size="10"/>
-	
-		<a href="javascript:searchNews()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
-		<span>（注：新闻类别中，“1”代表“动态”，“2”代表“要闻”，“3”代表“资讯”，“4”代表“公告”。）</span>
+		
+		<table id="dg" title="新闻信息" class="easyui-datagrid" fit="false" 
+		   pagination="true" rownumbers="true" url="" fit="true" toolbar="#tb" >
+			<thead>
+				<tr>
+					<th field="cb" checkbox="true"></th>
+					<th field="news_id" width="50" align="center">编号</th>
+					<th field="role" width="100" align="center">新闻类别</th>
+					
+					<th field="title" width="250" align="center" >新闻标题</th>
+					<th field="content"  width="250" align="center">新闻内容</th>
+					<th field="date" width="100" align="center">发布日期</th>
+					
+				</tr>
+			</thead>
+		</table>
+		
+		<!-- 新增编辑弹出框 -->
+		<div id="dlg" class="easyui-dialog" style="width: 570px;height: 350px;padding: 10px 20px"
+			closed="true" buttons="#dlg-buttons">
+			<form id="fm" method="post">
+				<table cellspacing="5px;">
+					<tr>
+						<td>新闻类别：</td>
+						<td><input type="text" name="role" id="role" class="easyui-validatebox" required="true"/></td>
+						<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>				
+					</tr>
+					
+					<tr>
+						<td>标题：</td>
+					   <td><input type="text" name="title" id="title" class="easyui-validatebox" required="true"/></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td valign="top">内容：</td>
+						<td colspan="4"><textarea rows="7" cols="50" name="content" id="content"></textarea></td>
+					</tr>
+					<tr>
+						<td>发布日期：</td>
+						<td><input class="easyui-datebox" name="date" id="date" required="true" editable="false" /></td>
+					</tr>
+				</table>
+			</form>
 		</div>
-	</div>
-	
-	<div id="dlg" class="easyui-dialog" style="width: 570px;height: 350px;padding: 10px 20px"
-		closed="true" buttons="#dlg-buttons">
-		<form id="fm" method="post">
-			<table cellspacing="5px;">
-				<tr>
-					<td>新闻类别：</td>
-					<td><input type="text" name="role" id="role" class="easyui-validatebox" required="true"/></td>
-					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>				
-				</tr>
-				
-				<tr>
-					<td>标题：</td>
-				   <td><input type="text" name="title" id="title" class="easyui-validatebox" required="true"/></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td valign="top">内容：</td>
-					<td colspan="4"><textarea rows="7" cols="50" name="content" id="content"></textarea></td>
-				</tr>
-				<tr>
-					<td>发布日期：</td>
-					<td><input class="easyui-datebox" name="date" id="date" required="true" editable="false" /></td>
-				</tr>
-			</table>
-		</form>
-	</div>
-	
-	<div id="dlg-buttons">
-		<a href="javascript:saveNews()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
-		<a href="javascript:closeNewsDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+		<div id="dlg-buttons">
+			<a href="javascript:saveNews()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
+			<a href="javascript:closeNewsDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+		</div>
+		
 	</div>
 </body>
 </html>
