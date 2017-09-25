@@ -22,9 +22,9 @@
 				text:"根",
 				children:[
 				{
-					text:"铜仁新闻信息管理",
+					text:"资源管理",
 					attributes:{
-						url:"../userManage/pageInit.do"
+						url:"../msgManage/pageInit.do"
 					}
 				},
 				{
