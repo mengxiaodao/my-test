@@ -6,7 +6,7 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="msg_name" jdbcType="VARCHAR" property="msgName" />
     <result column="msg_price" jdbcType="DECIMAL" property="msgPrice" />
-    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="publish_time" jdbcType="DATE" property="publishTime" />
     <result column="msg_type" jdbcType="TINYINT" property="msgType" />
     <result column="province_id" jdbcType="INTEGER" property="provinceId" />
     <result column="city_id" jdbcType="INTEGER" property="cityId" />
