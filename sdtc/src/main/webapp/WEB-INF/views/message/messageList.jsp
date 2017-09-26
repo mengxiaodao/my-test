@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jquery-easyui-1.3.3/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/jquery-easyui-1.3.3/themes/icon.css">
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/common/common-sale.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 <!--操作js提取  -->
@@ -16,19 +17,25 @@
 <body >
 	<div style="margin-top: 15px;" class="easyui-panel">
 		
-		<!-- <div id="tb">
+		<div>
 			<div>
 				<a href="javascript:openNewsAddDialog()" class="easyui-linkbutton" iconCls="icon-add" plain="true">添加</a>
 				<a href="javascript:openNewsModifyDialog()" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>
 				<a href="javascript:deleteNews()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>
 			</div>
 			<div>
-		   &nbsp;标题：&nbsp;<input type="text" name="s_title" id="s_title" size="10"/>
-		
-			<a href="javascript:searchNews()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
-			<span>（注：新闻类别中，“1”代表“动态”，“2”代表“要闻”，“3”代表“资讯”，“4”代表“公告”。）</span>
+			   	&nbsp;&nbsp;&nbsp;<span>资源名称：</span><input type="text" name="msgName" id="msgName" size="15" maxlength="15"/>
+				&nbsp;&nbsp;&nbsp;<span>类别：</span>
+				<select name="msgType" id="msgType" >
+					<option value="" >请选择</option >
+					<option value="1" >广告大牌</option >
+				    <option value="2" >电视多媒体</option >
+				    <option value="3" >LED显示屏</option >
+				</select>
+				<a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
+				
 			</div>
-		</div> -->
+		</div> 
 		
 		<table id="messageListTb" title="新闻信息"  >
 			

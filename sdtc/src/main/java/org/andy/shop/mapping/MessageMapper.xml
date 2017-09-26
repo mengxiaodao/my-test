@@ -46,7 +46,7 @@
 	<!-- 分页查询条件参数 -->
 	<sql id="queryMessagesInfoDTO">
 		<if test="msgName != null and msgName !=''">
-			and msg_name = #{msgName}
+			and msg_name like '%${msgName}%'
 		</if>
 		<if test="msgType != null and msgType !=''">
 			and msg_type = #{msgType}

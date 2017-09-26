@@ -15,29 +15,71 @@ function initDataGrid(param) {
         pageSize : 10,
         queryParams : param,
         columns:[[
-            {field:'id',align : 'center',title:'券编号',width:20},
+            {field:'id',align : 'center',title:'资源id',width:20},
             {field:'msgName',align : 'center',title:'资源名称',width:50},
-            {field:'publishTime',align : 'center',title:'资源发布时间',width:60},
-            {field:'msgType',align : 'center',title:'资源类型',width:20},
+            {field:'publishTime',align : 'center',title:'资源发布日期',width:60,formatter:function (value, row, index) {
+                return ChangeDateToString(value);
+            }},
+            {field:'msgType',align : 'center',title:'资源类型',width:20,formatter:function (value, row, index) {
+            	if (value == 1) { //资源类别，1广告大牌，2电视多媒体，3LED显示屏	
+                    return '广告大牌';
+                } else if (value == 2) {
+                    return "电视多媒体";
+                } else if (value == 3) { 
+                    return 'LED显示屏';
+                }
+            }},
             {field:'provinceId',align : 'center',title:'所属省份',width:20},
             {field:'cityId',align : 'center',title:'所属城市',width:60},
-            {field:'createTime',align : 'center',title:'创建时间',width:60}
-            
-           /* {field:'status',align : 'center',title:'使用状态',width:$(this).width() * 0.06,formatter:function (value, row, index){
-                if (value == 0) {
-                    return '<span style="color: blue;">未使用</span>';
-                } else if (value == 1) {
-                    return "已使用";
-                } else if (value == 2) { //未使用 & 有效期已过
-                    return '<span style="color: red;">已过期</span>';
-                }
-            }}*/
+            {field:'createTime',align:'center',title:'创建时间',width:60,formatter:function (value, row, index) {
+                return ChangeDateToString(value);
+            }}
         ]],
         onLoadSuccess:function(data){
         	//请求成功回调函数
         }
     });
 }
+
+//搜索按钮，点击查询
+function doSearch() {
+    if(checkSearchParameter()) { //如果参数验证通过
+        var params = getSearchValues();
+        $("#messageListTb").datagrid("reload",params);
+    }
+}
+//参数验证
+function checkSearchParameter() {
+    var params = getSearchValues();
+    /*
+    if (saleCommon.isNotEmpty(params.searchStartTime) && saleCommon.isNotEmpty(params.searchEndTime)
+        && params.searchStartTime > params.searchEndTime) {
+        $.messager.alert("警告","使用开始时间不能大于结束时间","warning");
+        return false;
+    }*/
+    return true;
+}
+//获取查询参数
+function getSearchValues() {
+    var params = {
+		msgName:$.trim($("#msgName").val()),//资源名称
+		msgType:$.trim($("#msgType").val()),//资源类型
+       
+    };
+    return params;
+}
+//重置查询参数
+function clearSearch() {
+    $("#parentCouponId").val("");
+    $("#couponName").val("");
+    $("#searchStartTime").val("");
+    $("#searchEndTime").val("");
+    $("#mobile").val("");
+    $("#orderCode").val("");
+    $("#tt").datagrid("reload",{});
+}
+
+
 
 
 
