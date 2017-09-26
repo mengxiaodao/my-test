@@ -3,15 +3,15 @@
 <mapper namespace="org.andy.shop.mapping.MessageMapper">
  
   <resultMap id="BaseResultMap" type="org.andy.shop.model.Message">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="msg_name" jdbcType="VARCHAR" property="msgName" />
-    <result column="msg_price" jdbcType="DECIMAL" property="msgPrice" />
-    <result column="publish_time" jdbcType="DATE" property="publishTime" />
-    <result column="msg_type" jdbcType="TINYINT" property="msgType" />
-    <result column="province_id" jdbcType="INTEGER" property="provinceId" />
-    <result column="city_id" jdbcType="INTEGER" property="cityId" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <id column="id"  property="id" />
+    <result column="msg_name"  property="msgName" />
+    <result column="msg_price"  property="msgPrice" />
+    <result column="publish_time"  property="publishTime" />
+    <result column="msg_type"  property="msgType" />
+    <result column="province_id"  property="provinceId" />
+    <result column="city_id" property="cityId" />
+    <result column="create_time"  property="createTime" />
+    <result column="update_time"  property="updateTime" />
   </resultMap>
  
   <sql id="Base_Column_List">
@@ -37,7 +37,7 @@
   	<select id="countMessagesByDto" resultType="java.lang.Integer"
 		parameterType="org.andy.shop.model.dto.MessageDto">
 		SELECT
-		count(1)
+		count(*)
 		from w_message
 		<where>
 			<include refid="queryMessagesInfoDTO" />
@@ -46,7 +46,7 @@
 	<!-- 分页查询条件参数 -->
 	<sql id="queryMessagesInfoDTO">
 		<if test="msgName != null and msgName !=''">
-			and msg_name like '%${msgName}%'
+			and msg_name LIKE CONCAT(CONCAT('%', #{msgName}), '%')
 		</if>
 		<if test="msgType != null and msgType !=''">
 			and msg_type = #{msgType}

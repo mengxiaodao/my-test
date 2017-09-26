@@ -20,7 +20,7 @@ public interface MessageMapper {
      * @Description: 资源管理查询，总条数 
      * @param: @param messageDto
      * @param: @return      
-     * @return: long
+     * @return: Integer
      * @author: mc
      */
     public Integer countMessagesByDto(MessageDto messageDto);
