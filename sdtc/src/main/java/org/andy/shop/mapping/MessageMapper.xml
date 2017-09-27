@@ -57,6 +57,16 @@
 		<if test="publishEndTime != null and publishEndTime !=''">
 			and publish_time <![CDATA[ <= ]]> #{publishEndTime}
 		</if>
-
 	</sql>
+	
+	<!--保存资源  -->
+	<insert id="insertMsg" parameterType="org.andy.shop.model.Message">
+	    insert into w_message (id, msg_name, msg_price, 
+	      publish_time, msg_type, province_id, 
+	      city_id, create_time
+	      )
+	    values (#{id}, #{msgName}, #{msgPrice},#{publishTime}, #{msgType}, #{provinceId}, 
+	      #{cityId}, now()
+	      )
+  	</insert>
 </mapper>

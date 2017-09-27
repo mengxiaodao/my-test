@@ -3,14 +3,17 @@ package org.andy.shop.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.andy.shop.model.Message;
 import org.andy.shop.model.dto.MessageDto;
 import org.andy.shop.model.vo.MessageVo;
 import org.andy.shop.service.MessageService;
 import org.andy.shop.utils.Pagination;
+import org.andy.shop.utils.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 @RequestMapping("/msgManage")
@@ -42,5 +45,23 @@ public class MessageController {
 	public Pagination<MessageVo> getMsgList(MessageDto messageDto) {
 		Pagination<MessageVo> messPagination = messageService.getMessagesByDto(messageDto);
 		return messPagination;
+	}
+	/**
+	 * 插入资源
+	 * @param message
+	 * @return
+	 */
+	@RequestMapping(value="/insertMsg.do")
+	@ResponseBody
+	public Result insertMsg(Message message) {
+		Result result = new Result();
+		try {
+			messageService.insertMsg(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.set("插入失败", false);
+		}
+		result.set("插入成功", true);
+		return result;
 	}
 }

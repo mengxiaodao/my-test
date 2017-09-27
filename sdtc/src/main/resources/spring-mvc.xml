@@ -36,7 +36,19 @@
 			</list>
 		</property>
 	</bean>
-
+	
+	 <!-- 在实际开发中通常都需配置 mvc:annotation-driven标签,这个标签是开启注解 -->  
+	<!-- <mvc:annotation-driven conversion-service="conversionService"/>
+	<bean id="conversionService"  class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+		转换器
+		<property name="converters">
+			<list>
+				日期类型转换
+				<bean class="org.andy.shop.utils.CustomDateConverter" />
+			</list>
+		</property>
+	</bean> -->
+	
 	<!-- 对模型视图名称的解析，即在模型视图名称添加前后缀 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -60,11 +72,8 @@
 			<value>4096</value>
 		</property>
 	</bean>
-	
-	<!--配置类似全局的拦截器，springmvc框架将配置的类似全局拦截器注入到每个Handlermapping中  -->
-    <!-- 在实际开发中通常都需配置 mvc:annotation-driven标签,这个标签是开启注解 -->  
-    <mvc:annotation-driven></mvc:annotation-driven>  
     
+    <!--配置类似全局的拦截器，springmvc框架将配置的类似全局拦截器注入到每个Handlermapping中  -->
     <mvc:interceptors>  
         <mvc:interceptor>  
            <!--  <mvc:mapping path="/**" />    /** 表示所有的url，包括子url路径  -->

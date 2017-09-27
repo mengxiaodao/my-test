@@ -12,13 +12,14 @@ function initDataGrid(param) {
         rownumbers : true,
         singleSelect : false,
         pagination : true,
-        pageSize : 10,
+        pageList: [5,10,15,20],
+        pageSize:5,
         queryParams : param,
         columns:[[
             {field:'id',align : 'center',title:'资源id',width:20},
-            {field:'msgName',align : 'center',title:'资源名称',width:50},
-            {field:'publishTime',align : 'center',title:'资源发布日期',width:60,formatter:function (value, row, index) {
-                return ChangeDateToString(value);
+            {field:'msgName',align : 'center',title:'资源名称',width:40},
+            {field:'publishTime',align : 'center',title:'资源发布日期',width:30,formatter:function (value, row, index) {
+                return changeDateToString(value);
             }},
             {field:'msgType',align : 'center',title:'资源类型',width:20,formatter:function (value, row, index) {
             	if (value == 1) { //资源类别，1广告大牌，2电视多媒体，3LED显示屏	
@@ -30,9 +31,14 @@ function initDataGrid(param) {
                 }
             }},
             {field:'provinceId',align : 'center',title:'所属省份',width:20},
-            {field:'cityId',align : 'center',title:'所属城市',width:60},
-            {field:'createTime',align:'center',title:'创建时间',width:60,formatter:function (value, row, index) {
-                return ChangeDateToString(value);
+            {field:'cityId',align : 'center',title:'所属城市',width:20},
+            {field:'createTime',align:'center',title:'创建时间',width:40,formatter:function (value, row, index) {
+                return changeDateToStringTime(value);
+            }},
+            {field:'operater',align:'center',title:'操作',width:30,formatter:function (value, row, index) {
+               var str = '<a href="javascript:openMsgAddDialog('+row.id+')" class="easyui-linkbutton" iconCls="icon-edit" plain="true">修改</a>' +
+                		'&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:deleteMsg('+row.id+')" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除</a>';
+               return str;
             }}
         ]],
         onLoadSuccess:function(data){
@@ -47,6 +53,12 @@ function doSearch() {
         var params = getSearchValues();
         $("#messageListTb").datagrid("reload",params);
     }
+}
+//重置查询参数
+function resetSerchParam(){
+	$("#msgName").val("");		
+	$("#msgType").val("");
+	//$("#date").datebox("setValue","");
 }
 //参数验证
 function checkSearchParameter() {
@@ -68,27 +80,50 @@ function getSearchValues() {
     };
     return params;
 }
-//重置查询参数
-function clearSearch() {
-    $("#parentCouponId").val("");
-    $("#couponName").val("");
-    $("#searchStartTime").val("");
-    $("#searchEndTime").val("");
-    $("#mobile").val("");
-    $("#orderCode").val("");
-    $("#tt").datagrid("reload",{});
+
+//新增弹出框
+function openMsgAddDialog(id){
+	//加个清空操作
+	resetValue();
+	if(!isEmpty(id)){
+		//编辑
+		alert(id);
+		$("#editDlg").dialog("open").dialog("setTitle","编辑资源信息");
+	}else{
+		//添加
+		$("#editDlg").dialog("open").dialog("setTitle","添加资源信息");
+	}
 }
-
-
-
-
-
-
-/* 我理解的应该是，由于是iframe的页面，所以需要在子页面调用父页面的close方法去关闭panel
-window.parent.$('#tt').tabs('close','修改日志1'); 
-*/
-var url;
-function deleteNews(){
+//关闭新增、编辑弹出框
+function closeMsgDialog(){
+	$("#editDlg").dialog("close");
+}
+//保存资源
+function saveMsg(){
+	$("#editFm").form("submit",{
+		url:ctx + '/msgManage/insertMsg.do',
+		onSubmit:function(){
+			return $(this).form("validate"); //验证是否通过
+		},
+		success:function(result){
+			var data = eval('('+result+')');
+			if(data.status){
+				$.messager.alert("系统提示",data.message);
+				$("#editDlg").dialog("close");
+				$("#messageListTb").datagrid("load"); //分页从第一页开始
+			}else{
+				$.messager.alert("系统提示",data.errorMsg);
+				return;
+			}
+		}
+	});
+}
+//清空编辑弹框内容
+function resetValue(){
+	$("#editFm").get(0).reset();
+}
+//删除资源信息,参数id
+function deleteMsg(id){
 	var selectedRows=$("#dg").datagrid('getSelections');
 	if(selectedRows.length==0){
 		$.messager.alert("系统提示","请选择要删除的数据！");
@@ -113,6 +148,18 @@ function deleteNews(){
 	});
 }
 
+
+
+
+
+
+
+/* 我理解的应该是，由于是iframe的页面，所以需要在子页面调用父页面的close方法去关闭panel
+window.parent.$('#tt').tabs('close','修改日志1'); 
+*/
+var url;
+
+
 function searchNews(){
 	
 	//window.parent.$('#tabs').tabs('close','铜仁新闻信息管理'); //调用父窗口的关闭tab选显卡方法
@@ -123,38 +170,10 @@ function searchNews(){
 	}); 
 }
 
-function openNewsAddDialog(){
-	$("#dlg").dialog("open").dialog("setTitle","添加新闻信息");
-	url="news!save";
-}
 
-function saveNews(){
-	$("#fm").form("submit",{
-		url:url,
-		onSubmit:function(){
-			
-			return $(this).form("validate");
-		},
-		success:function(result){
-			if(result.errorMsg){
-				$.messager.alert("系统提示",result.errorMsg);
-				return;
-			}else{
-				$.messager.alert("系统提示","保存成功");
-				resetValue();
-				$("#dlg").dialog("close");
-				$("#dg").datagrid("reload");
-			}
-		}
-	});
-}
 
-function resetValue(){
-	$("#role").val("");		
-	$("#title").val("");
-	$("#content").val("");
-	$("#date").datebox("setValue","");
-}
+
+
 
 function closeNewsDialog(){
 	$("#dlg").dialog("close");

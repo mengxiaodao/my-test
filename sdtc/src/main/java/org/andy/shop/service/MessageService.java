@@ -1,5 +1,6 @@
 package org.andy.shop.service;
 
+import org.andy.shop.model.Message;
 import org.andy.shop.model.dto.MessageDto;
 import org.andy.shop.model.vo.MessageVo;
 import org.andy.shop.utils.Pagination;
@@ -13,4 +14,10 @@ public interface MessageService {
 	 * @author: mc
 	 */
 	public Pagination<MessageVo> getMessagesByDto(MessageDto messageDto);
+	
+	/**
+	 * 插入资源对像
+	 * @param message
+	 */
+	public void insertMsg(Message message);
 }

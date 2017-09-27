@@ -1,6 +1,7 @@
 package org.andy.shop.mapping;
 import java.util.List;
 
+import org.andy.shop.model.Message;
 import org.andy.shop.model.dto.MessageDto;
 import org.andy.shop.model.vo.MessageVo;
 
@@ -24,4 +25,9 @@ public interface MessageMapper {
      * @author: mc
      */
     public Integer countMessagesByDto(MessageDto messageDto);
+    /**
+     * 插入资源对像
+     * @param message
+     */
+    public void insertMsg(Message message);
 }
