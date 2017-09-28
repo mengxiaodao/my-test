@@ -20,4 +20,11 @@ public interface MessageService {
 	 * @param message
 	 */
 	public void insertMsg(Message message);
+	
+	/**
+	 * 获取需要导出的总共条数
+	 * @param messageDto
+	 * @return
+	 */
+	public Integer getMsgExportCount(MessageDto messageDto);
 }

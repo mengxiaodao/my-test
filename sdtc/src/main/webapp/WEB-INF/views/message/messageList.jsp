@@ -12,7 +12,7 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 <!--操作js提取  -->
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/message/message.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/message/message.js?version=20171221"></script>
 </head>
 <body >
 	<div style="margin-top: 15px;" class="easyui-panel">
@@ -32,7 +32,7 @@
 				</select>
 				<a href="javascript:doSearch()" class="easyui-linkbutton" iconCls="icon-search" plain="true">搜索</a>
 				<a href="javascript:resetSerchParam()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">置空</a>
-				<a href="javascript:exportExcel()" class="easyui-linkbutton" iconCls="icon-print" plain="true">导出</a>
+				<a href="javascript:exportMsgExcel()" class="easyui-linkbutton" iconCls="icon-print" plain="true">导出</a>
 			</div>
 		</div> 
 		
@@ -83,6 +83,17 @@
 		<div id="dlg-buttons">
 			<a href="javascript:saveMsg()" class="easyui-linkbutton" iconCls="icon-ok">保存</a>
 			<a href="javascript:closeMsgDialog()" class="easyui-linkbutton" iconCls="icon-cancel">关闭</a>
+		</div>
+		
+		<!--导出数据分组  -->
+		<div style="width: 500px; height: 300px;" id="exportWin"
+			class="easyui-window" title="导出数据分组"
+			data-options="modal:true,closed:true">
+			<div data-options="region:'center',border:false"
+				style="padding: 10px;">
+				<h3 style="color: red; margin-left: 30px;">请选择要导出的数据分组</h3>
+				<div id="exportSpan" align="center"></div>
+			</div>
 		</div>
 		
 	</div>

@@ -30,6 +30,7 @@ function initDataGrid(param) {
                     return 'LED显示屏';
                 }
             }},
+            {field:'msgPrice',align : 'center',title:'资源售价',width:20},
             {field:'provinceId',align : 'center',title:'所属省份',width:20},
             {field:'cityId',align : 'center',title:'所属城市',width:20},
             {field:'createTime',align:'center',title:'创建时间',width:40,formatter:function (value, row, index) {
@@ -51,7 +52,7 @@ function initDataGrid(param) {
 function doSearch() {
     if(checkSearchParameter()) { //如果参数验证通过
         var params = getSearchValues();
-        $("#messageListTb").datagrid("reload",params);
+        $("#messageListTb").datagrid("load",params); //从第一页开始
     }
 }
 //重置查询参数
@@ -60,7 +61,7 @@ function resetSerchParam(){
 	$("#msgType").val("");
 	//$("#date").datebox("setValue","");
 }
-//参数验证
+//参数验证，ture、false
 function checkSearchParameter() {
     var params = getSearchValues();
     /*
@@ -147,7 +148,25 @@ function deleteMsg(id){
 		}
 	});
 }
-
+/**
+ * 导出excel
+ */
+function exportMsgExcel(){
+	var obj={};
+	var params = getSearchValues();//导出参数
+	obj.params = params;
+	obj.rows = 5;//多少条每个表
+	obj.countUrl = ctx + '/msgManage/getMsgExportCount.do';//总共导出的条数接口
+	
+	//拼接导出excel参数
+	var exParams = "&msgName="+params.msgName+"&msgType="+params.msgType;
+	obj.exportUrl = ctx + '/msgManage/exportMsgList.do?rows='+obj.rows + exParams; //导出excel接口
+	
+	obj.spanId='exportSpan';	//填充span
+	obj.divId='exportWin'; //弹出div
+	//调用公用导出方法
+	exportExcel(obj);
+}
 
 
 

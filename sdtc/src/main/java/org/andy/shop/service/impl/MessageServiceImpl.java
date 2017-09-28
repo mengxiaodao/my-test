@@ -46,5 +46,11 @@ public class MessageServiceImpl implements MessageService{
 		}
 		messageMapper.insertMsg(message);
 	}
+	
+	//获取需要导出的总共条数
+	@Override
+	public Integer getMsgExportCount(MessageDto messageDto) {
+		return messageMapper.countMessagesByDto(messageDto);
+	}
 
 }

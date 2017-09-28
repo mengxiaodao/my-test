@@ -9,13 +9,14 @@
   <url>http://maven.apache.org</url>
   
   <properties>  
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
-        <spring.version>4.1.4.RELEASE</spring.version>  
-        <jackson.version>2.5.0</jackson.version>  
-    </properties>  
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+      <spring.version>4.1.4.RELEASE</spring.version>  
+      <jackson.version>2.5.0</jackson.version>  
+      <!-- 导入导出 -->
+      <poi-ooxml.version>3.8</poi-ooxml.version>
+  </properties>  
   
     <dependencies>  
-  
         <dependency>  
             <groupId>junit</groupId>  
             <artifactId>junit</artifactId>  
@@ -174,6 +175,18 @@
             <artifactId>commons-fileupload</artifactId>  
             <version>1.2.2</version>  
         </dependency>  
+        <!-- 导入导出jar包 -->
+        <dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>${poi-ooxml.version}</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>stax-api</artifactId>
+					<groupId>stax</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 
     </dependencies>  
   <build>
