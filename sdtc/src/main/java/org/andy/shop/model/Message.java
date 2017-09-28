@@ -1,8 +1,6 @@
 package org.andy.shop.model;
 import java.math.BigDecimal;
 import java.util.Date;
-
-import org.springframework.format.annotation.DateTimeFormat;
 public class Message {
     private Long id;	//主键资源id
 
@@ -10,7 +8,6 @@ public class Message {
 
     private BigDecimal msgPrice;//资源价格
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date publishTime;//资源发布时间
 
     private Byte msgType;//资源类别，1广告大牌，2电视多媒体，3LED显示屏	
