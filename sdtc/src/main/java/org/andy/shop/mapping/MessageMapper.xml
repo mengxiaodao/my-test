@@ -69,4 +69,10 @@
 	      #{cityId}, now()
 	      )
   	</insert>
+  	
+  	<!-- 删除资源 -->
+  	<delete id="deleteMsgById" parameterType="java.lang.Long" >
+	    delete from w_message
+	    where id = #{id}
+   	</delete>
 </mapper>

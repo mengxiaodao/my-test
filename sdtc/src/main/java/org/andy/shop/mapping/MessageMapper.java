@@ -30,4 +30,10 @@ public interface MessageMapper {
      * @param message
      */
     public void insertMsg(Message message);
+    /**
+     * 根据id删除资源
+     * @param id
+     * @return
+     */
+    public Integer deleteMsgById(long  id );
 }

@@ -1,6 +1,11 @@
 $(function () {
 	//初始化数据表格
 	initDataGrid({});
+	/**
+	 * reload加载数据分页从当前页开始，load从第一页开始
+	 * window.parent.$('#tabs').tabs('close','铜仁新闻信息管理'); //调用父窗口的关闭tab选显卡方法
+	 *	window.parent.openTab("title","url"); //调用父窗口的openTab方法
+	 */
 });
 function initDataGrid(param) {
     $('#messageListTb').datagrid({
@@ -77,7 +82,6 @@ function getSearchValues() {
     var params = {
 		msgName:$.trim($("#msgName").val()),//资源名称
 		msgType:$.trim($("#msgType").val()),//资源类型
-       
     };
     return params;
 }
@@ -111,7 +115,7 @@ function saveMsg(){
 			if(data.status){
 				$.messager.alert("系统提示",data.message);
 				$("#editDlg").dialog("close");
-				$("#messageListTb").datagrid("load"); //分页从第一页开始
+				$("#messageListTb").datagrid("load"); 
 			}else{
 				$.messager.alert("系统提示",data.errorMsg);
 				return;
@@ -125,28 +129,20 @@ function resetValue(){
 }
 //删除资源信息,参数id
 function deleteMsg(id){
-	var selectedRows=$("#dg").datagrid('getSelections');
-	if(selectedRows.length==0){
-		$.messager.alert("系统提示","请选择要删除的数据！");
-		return;
+	if(!isEmpty(id)){
+		$.messager.confirm("系统提示","您确认要删掉这条数据吗？",function(r){
+			if(r){
+				$.get(ctx + '/msgManage/deleteMsgById.do',{id:id},function(result){
+					if(result.status){
+						$.messager.alert("系统提示","您已成功删除这条数据！");
+						$("#messageListTb").datagrid("reload");
+					}else{
+						$.messager.alert('系统提示',result.message);
+					}
+				});
+			}
+		});
 	}
-	var strIds=[];
-	for(var i=0;i<selectedRows.length;i++){
-		strIds.push(selectedRows[i].news_id);
-	}
-	var ids=strIds.join(",");
-	$.messager.confirm("系统提示","您确认要删掉这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
-		if(r){
-			$.post("news!delete",{delIds:ids},function(result){
-				if(result.success){
-					$.messager.alert("系统提示","您已成功删除<font color=red>"+result.delNums+"</font>条数据！");
-					$("#dg").datagrid("reload");
-				}else{
-					$.messager.alert('系统提示',result.errorMsg);
-				}
-			},"json");
-		}
-	});
 }
 /**
  * 导出excel
@@ -168,48 +164,3 @@ function exportMsgExcel(){
 	exportExcel(obj);
 }
 
-
-
-
-
-
-/* 我理解的应该是，由于是iframe的页面，所以需要在子页面调用父页面的close方法去关闭panel
-window.parent.$('#tt').tabs('close','修改日志1'); 
-*/
-var url;
-
-
-function searchNews(){
-	
-	//window.parent.$('#tabs').tabs('close','铜仁新闻信息管理'); //调用父窗口的关闭tab选显卡方法
-	window.parent.openTab("qqqq","wwwww"); //调用父窗口的openTab方法
-	
-	$('#dg').datagrid('load',{
-		s_title:$('#s_title').val()
-	}); 
-}
-
-
-
-
-
-
-function closeNewsDialog(){
-	$("#dlg").dialog("close");
-	resetValue();
-}
-
-function openNewsModifyDialog(){
-	var selectedRows=$("#dg").datagrid('getSelections');
-	if(selectedRows.length!=1){
-		$.messager.alert("系统提示","请选择一条要编辑的数据！");
-		return;
-	}
-	var row=selectedRows[0];
-	$("#dlg").dialog("open").dialog("setTitle","编辑信件信息");
-	$("#role").val(row.role);
-	$("#title").val(row.title);
-	$("#content").val(row.content);	
-	$("#date").datebox("setValue",row.date);		
-	url="news!save?news_id="+row.news_id;
-}

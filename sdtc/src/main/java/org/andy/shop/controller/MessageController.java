@@ -74,6 +74,20 @@ public class MessageController {
 		return result;
 	}
 	/**
+	 * 删除资源by id
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/deleteMsgById.do")
+	@ResponseBody
+	public Result deleteMsgById(long id) {
+		Result result = new Result();
+		messageService.deleteMsgById(id);
+		result.set("删除成功", true);
+		return result;
+	}
+	
+	/**
 	 * 统计导出条数
 	 * @param messageDto
 	 * @return

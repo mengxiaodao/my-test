@@ -52,5 +52,13 @@ public class MessageServiceImpl implements MessageService{
 	public Integer getMsgExportCount(MessageDto messageDto) {
 		return messageMapper.countMessagesByDto(messageDto);
 	}
+	/**
+	 * 删除资源byid
+	 */
+	@Override
+	public Integer deleteMsgById(long id) {
+		Integer i = messageMapper.deleteMsgById(id);
+		return i;
+	}
 
 }

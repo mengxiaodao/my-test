@@ -27,4 +27,11 @@ public interface MessageService {
 	 * @return
 	 */
 	public Integer getMsgExportCount(MessageDto messageDto);
+	
+	/**
+	 * 根据id删除资源
+	 * @param id
+	 * @return
+	 */
+	public Integer deleteMsgById(long id);
 }
