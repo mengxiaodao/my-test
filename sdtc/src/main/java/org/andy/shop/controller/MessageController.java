@@ -29,11 +29,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class MessageController {
 	@Resource
 	private MessageService messageService;
-	
+
 	/**
-	*@autho mc
-	*@date 2017年9月17日 下午6:41:25 
-	*@Description: 展示用户管理列表
+	 * 展示资源分页列表
+	 * @param request
+	 * @return
 	 */
 	@RequestMapping("/pageInit.do")
 	public ModelAndView  pageInit(HttpServletRequest request){
