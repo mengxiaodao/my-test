@@ -43,7 +43,8 @@ public class MessageController {
 	}
 	
 	/**
-	 * @Description: 资源管理获取分页列表
+	 * 蓝马乱码乱码
+	 * @Description: 资源管理获取分页列表啦
 	 * @param: @param messageDto
 	 * @param: @return      
 	 * @return: Pagination<MessageVo>
