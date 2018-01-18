@@ -61,7 +61,7 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public Integer deleteMsgById(Long id) {
 		if (null == id){
-			throw new BusinessException("资源ID不可为空");
+			BusinessException.throwMessage("资源ID不可为空111");
 		}
 		Integer i = messageMapper.deleteMsgById(id);
 		return i;
