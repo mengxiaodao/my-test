@@ -35,5 +35,5 @@ public interface MessageMapper {
      * @param id
      * @return
      */
-    public Integer deleteMsgById(long  id );
+    public Integer deleteMsgById(Long  id );
 }

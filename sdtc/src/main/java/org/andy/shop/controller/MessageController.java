@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.andy.shop.exception.BusinessException;
 import org.andy.shop.model.Message;
 import org.andy.shop.model.dto.MessageDto;
 import org.andy.shop.model.vo.MessageVo;
@@ -81,10 +82,14 @@ public class MessageController {
 	 */
 	@RequestMapping(value="/deleteMsgById.do")
 	@ResponseBody
-	public Result deleteMsgById(long id) {
+	public Result deleteMsgById(Long id) {
 		Result result = new Result();
-		messageService.deleteMsgById(id);
-		result.set("删除成功", true);
+		try {
+			messageService.deleteMsgById(id);
+			result.set("删除成功", true);
+		} catch (BusinessException be) {
+			result.set(be.getMessage(), false);
+		}
 		return result;
 	}
 	

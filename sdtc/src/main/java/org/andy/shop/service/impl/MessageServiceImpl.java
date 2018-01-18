@@ -2,9 +2,8 @@ package org.andy.shop.service.impl;
 
 import java.util.Date;
 import java.util.List;
-
 import javax.annotation.Resource;
-
+import org.andy.shop.exception.BusinessException;
 import org.andy.shop.mapping.MessageMapper;
 import org.andy.shop.model.Message;
 import org.andy.shop.model.dto.MessageDto;
@@ -12,7 +11,6 @@ import org.andy.shop.model.vo.MessageVo;
 import org.andy.shop.service.MessageService;
 import org.andy.shop.utils.DateUtil;
 import org.andy.shop.utils.Pagination;
-import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -61,7 +59,10 @@ public class MessageServiceImpl implements MessageService{
 	 * 删除资源byid
 	 */
 	@Override
-	public Integer deleteMsgById(long id) {
+	public Integer deleteMsgById(Long id) {
+		if (null == id){
+			throw new BusinessException("资源ID不可为空");
+		}
 		Integer i = messageMapper.deleteMsgById(id);
 		return i;
 	}
