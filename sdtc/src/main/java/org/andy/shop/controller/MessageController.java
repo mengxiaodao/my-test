@@ -14,6 +14,7 @@ import org.andy.shop.model.Message;
 import org.andy.shop.model.dto.MessageDto;
 import org.andy.shop.model.vo.MessageVo;
 import org.andy.shop.service.MessageService;
+import org.andy.shop.service.redisUtil.RedisCacheUtil;
 import org.andy.shop.utils.DateUtil;
 import org.andy.shop.utils.Pagination;
 import org.andy.shop.utils.Result;
@@ -30,6 +31,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class MessageController {
 	@Resource
 	private MessageService messageService;
+	@Resource
+	private RedisCacheUtil redisCacheUtil;
 
 	/**
 	 * 展示资源分页列表
@@ -177,4 +180,5 @@ public class MessageController {
 		}
 		 return result;
 	}
+
 }
