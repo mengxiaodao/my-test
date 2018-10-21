@@ -1,7 +1,7 @@
 package org.andy.shop.controller;
 
 import org.andy.shop.model.Message;
-import org.andy.shop.model.User;
+import org.andy.shop.model.SysUser;
 import org.andy.shop.model.cart.BuyerCart;
 import org.andy.shop.model.cart.BuyerItem;
 import org.andy.shop.model.cart.ProdStock;
@@ -80,7 +80,7 @@ public class ProdController {
             //4, 将购物车追加到Redis中
             HttpSession session = request.getSession(false); //得到session对象
             //取出会话数据
-            User user = (User) session.getAttribute("user");
+            SysUser user = (SysUser) session.getAttribute("user");
             String key = "buyerCart"+ String.valueOf(user.getId());
 
             prodService.insertBuyerCartToRedis(buyerCart,key);
