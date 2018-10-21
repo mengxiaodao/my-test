@@ -102,9 +102,13 @@ function closeNewsDialog(){
 //保存资源
 function saveNews(){
 	$("#editFm").form("submit",{
+		var param =
+
 		url:ctx + '/news/insertNews.do',
-		onSubmit:function(){
-			return $(this).form("validate"); //验证是否通过
+		onSubmit:function(param){
+			var rs = $(this).form("validate"); //验证是否通过
+			console.log(param);
+			return rs;
 		},
 		success:function(result){
 			var data = eval('('+result+')');

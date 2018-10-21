@@ -41,7 +41,7 @@
 		</table>
 		
 		<!-- 新增编辑弹出框 -->
-		<div id="editDlg" class="easyui-dialog" style="width: 570px;height: 350px;padding: 10px 20px"
+		<div id="editDlg" class="easyui-dialog" style="width: 570px;height: 500px;padding: 10px 20px"
 			closed="true" buttons="#dlg-buttons">
 			<form id="editFm" method="post">
 				<table cellspacing="5px;">
@@ -62,14 +62,17 @@
 					<tr>
 						<td>缩略图：</td>
 						<td>
-					   		<input type="text" name="thumbnail"   class="easyui-validatebox"  required="true"/>
+					   		<input type="file" name="thumbnail"   class="easyui-validatebox"  />
+							<div style="width:100px;height:100px">
+
+							</div>
 					   	</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>内容：</td>
 						<td>
-							<input type="text" name="content"   class="easyui-validatebox"  required="true"/>
+							<textarea style="width: 300px; height: 100px" name="content" id="content" required="true">${billVo.remark}</textarea>
 						</td>
 						<td></td>
 					</tr>
