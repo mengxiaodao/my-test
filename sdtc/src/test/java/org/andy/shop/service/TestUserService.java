@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * @version 2.2
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring.xml",
+@ContextConfiguration(locations = { "classpath:spring-mvc.xml",
 		"classpath:spring-mybatis.xml" })
 public class TestUserService {
 

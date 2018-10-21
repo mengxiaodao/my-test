@@ -1,11 +1,13 @@
-package org.andy.shop.model;
+package org.andy.shop.model.dto;
+
+import org.andy.shop.utils.BaseDto;
 
 import java.util.Date;
 
 /**
  * Created by mengchuang on 2018/10/21
  **/
-public class SysUser {
+public class SysUserDto extends BaseDto {
     private Long id;//用户id
     private String userName; // 用户名
     private String passWord; // 密码

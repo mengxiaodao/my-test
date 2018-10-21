@@ -4,7 +4,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import org.andy.shop.model.SysUser;
-import org.andy.shop.service.UserService;
+import org.andy.shop.service.SysUserService;
 import org.andy.shop.utils.Result;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +21,7 @@ import com.alibaba.druid.util.StringUtils;
 @RequestMapping("/clientLogin")
 public class LoginController {
 	@Resource
-	private UserService userService;
+	private SysUserService sysUserService;
 	/**
 	*@autho mc
 	*@date 2017年9月16日 下午9:07:58 
@@ -36,7 +36,7 @@ public class LoginController {
 			return result;
 		}
 		//userName查询对像
-		SysUser user = userService.getUserByUserName(userName);
+		SysUser user = sysUserService.getUserByUserName(userName);
 		if (user != null) {
 			//密码不匹配，返回密码错误
 			if (!password.equals(user.getPassWord())) {

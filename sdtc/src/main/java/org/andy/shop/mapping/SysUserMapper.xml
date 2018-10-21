@@ -5,7 +5,7 @@
 <mapper namespace="org.andy.shop.mapping.SysUserMapper" >
 	
 	<!--映射数据库字段 ,column数据库字段，property实体类属性 -->
-	<resultMap type="org.andy.shop.model.User" id="UserResultMap">    
+	<resultMap type="org.andy.shop.model.vo.SysUserVo" id="UserResultMap">
 	    <id column="id" property="id"/>    
 	    <result column="user_name" property="userName"/>    
 	    <result column="pass_word" property="passWord"/>
@@ -13,8 +13,12 @@
 	    <result column="is_deleted" property="isDeleted"/>
 	    <result column="create_time" property="createTime"/>
 	</resultMap>
-   
-  	 <!--  查询所有用户list-->
+
+	<sql id="Base_Column_List">
+		id, user_name, pass_word, name, is_deleted, create_time
+	</sql>
+
+	<!--  查询所有用户list-->
 	<select id="getAllUsers"  resultMap="UserResultMap">    
 	      select * from sys_user
 	</select> 
@@ -22,6 +26,83 @@
 	<!-- 根据用户名userName，查询用户 -->
 	<select id="getUserByUserName" resultMap="UserResultMap" parameterType="java.lang.String" >  
 	    SELECT * FROM sys_user  WHERE user_name = #{userName}
- 	</select>  
- 	
+ 	</select>
+
+	<!-- 分页查询，后台用户列表 -->
+	<select id="getUsersByDto" resultMap="UserResultMap"
+			parameterType="org.andy.shop.model.dto.SysUserDto">
+		SELECT
+		<include refid="Base_Column_List" />
+		from sys_user
+		<where>
+			<include refid="queryUsersInfoDTO" />
+		</where>
+		ORDER BY
+		create_time DESC
+		LIMIT
+		#{start}, #{rows}
+	</select>
+	<!-- 分页查询，用户总数 -->
+	<select id="countUsersByDto" resultType="java.lang.Integer"
+			parameterType="org.andy.shop.model.dto.MessageDto">
+		SELECT
+		count(*)
+		from sys_user
+		<where>
+			<include refid="queryUsersInfoDTO" />
+		</where>
+	</select>
+	<!-- 分页查询条件参数 -->
+	<sql id="queryUsersInfoDTO">
+		<if test="userName != null and userName !=''">
+			and user_name LIKE CONCAT(CONCAT('%', #{userName}), '%')
+		</if>
+		<if test="name != null and name !=''">
+			and name LIKE CONCAT(CONCAT('%', #{name}), '%')
+		</if>
+	</sql>
+
+	<insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"  parameterType="org.andy.shop.model.dto.SysUserDto" >
+		insert into sys_user
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="userName != null" >
+				user_name,
+			</if>
+			<if test="passWord != null" >
+				pass_word,
+			</if>
+			<if test="name != null" >
+				name,
+			</if>
+			<if test="isDeleted != null" >
+				is_deleted,
+			</if>
+			<if test="createTime != null" >
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="userName != null" >
+				#{userName} ,
+			</if>
+			<if test="passWord != null" >
+				#{passWord} ,
+			</if>
+			<if test="name != null" >
+				#{name} ,
+			</if>
+			<if test="isDeleted != null" >
+				#{isDeleted} ,
+			</if>
+			<if test="createTime != null" >
+				#{createTime} ,
+			</if>
+		</trim>
+	</insert>
+
+	<!--删除用户-->
+	<delete id="deleteSysUserById" parameterType="java.lang.Long" >
+		delete from sys_user
+		where id = #{id}
+	</delete>
 </mapper>

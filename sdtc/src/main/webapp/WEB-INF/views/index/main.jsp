@@ -28,9 +28,9 @@
 					}
 				},
 				{
-					text:"铜仁旅游信息管理",
+					text:"后台用户管理",
 					attributes:{
-						url:"tourism.jsp"
+                        url:"../sysUser/pageInit.do"
 					}
 				},
 				{
