@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.andy.shop.mapping.NewsMapper">
+    <!--映射数据库字段 ,column数据库字段，property实体类属性 -->
+    <resultMap type="org.andy.shop.model.vo.NewsVo" id="NewsResultMap">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="sub_title" property="subTitle"/>
+        <result column="thumbnail" property="thumbnail"/>
+        <result column="type" property="type"/>
+        <result column="create_name" property="createName"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_deleted" property="isDeleted"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, title, sub_title, thumbnail,type, create_name,create_by, is_deleted, create_time
+    </sql>
+
+    <!-- 分页查询，后台用户列表 -->
+    <select id="getNewsByDto" resultMap="NewsResultMap"
+            parameterType="org.andy.shop.model.dto.NewsDto">
+        SELECT
+        <include refid="Base_Column_List" />
+        from news
+        <where>
+            <include refid="queryNewsInfoDTO" />
+        </where>
+        ORDER BY
+        create_time DESC
+        LIMIT
+        #{start}, #{rows}
+    </select>
+    <!-- 分页查询，用户总数 -->
+    <select id="countNewsByDto" resultType="java.lang.Integer"
+            parameterType="org.andy.shop.model.dto.NewsDto">
+        SELECT
+        count(*)
+        from news
+        <where>
+            <include refid="queryNewsInfoDTO" />
+        </where>
+    </select>
+    <!-- 分页查询条件参数 -->
+    <sql id="queryNewsInfoDTO">
+        <if test="title != null and title !=''">
+            and title LIKE CONCAT(CONCAT('%', #{title}), '%')
+        </if>
+        <if test="type != null ">
+            and type = #{type}
+        </if>
+    </sql>
+
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id"  parameterType="org.andy.shop.model.dto.NewsDto" >
+        insert into news
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="title != null" >
+                title,
+            </if>
+            <if test="subTitle != null" >
+                sub_title,
+            </if>
+            <if test="thumbnail != null" >
+                thumbnail,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="createBy != null" >
+                create_by,
+            </if>
+            <if test="createName != null" >
+                create_name,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="isDeleted != null" >
+                is_deleted,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="title != null" >
+                #{title} ,
+            </if>
+            <if test="subTitle != null" >
+                #{subTitle} ,
+            </if>
+            <if test="thumbnail != null" >
+                #{thumbnail} ,
+            </if>
+            <if test="content != null" >
+                #{content} ,
+            </if>
+            <if test="type != null" >
+                #{type} ,
+            </if>
+            <if test="createBy != null" >
+                #{createBy} ,
+            </if>
+            <if test="createName != null" >
+                #{createName} ,
+            </if>
+            <if test="createTime != null" >
+                #{createTime} ,
+            </if>
+            <if test="isDeleted != null" >
+                #{isDeleted} ,
+            </if>
+        </trim>
+    </insert>
+
+    <!--删除新闻-->
+    <delete id="deleteNewsById" parameterType="java.lang.Long" >
+        delete from news
+        where id = #{id}
+    </delete>
+</mapper>

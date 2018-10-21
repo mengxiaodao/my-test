@@ -34,9 +34,9 @@
 					}
 				},
 				{
-					text:"互动交流信息管理",
+					text:"新闻管理",
 					attributes:{
-						url:"communication.jsp"
+                        url:"../news/pageInit.do"
 					}
 				},{
 					text:"城乡发展信息管理",
