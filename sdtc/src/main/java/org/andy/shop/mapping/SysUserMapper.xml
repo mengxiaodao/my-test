@@ -2,27 +2,26 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.andy.shop.mapping.UserMapper" >
+<mapper namespace="org.andy.shop.mapping.SysUserMapper" >
 	
 	<!--映射数据库字段 ,column数据库字段，property实体类属性 -->
 	<resultMap type="org.andy.shop.model.User" id="UserResultMap">    
 	    <id column="id" property="id"/>    
 	    <result column="user_name" property="userName"/>    
-	    <result column="password" property="password"/>  
-	    <result column="real_name" property="realName"/> 
-	    <result column="tel" property="tel"/>    
-	    <result column="create_time" property="createTime"/> 
-	    <result column="update_time" property="updateTime"/>
-	</resultMap>   
+	    <result column="pass_word" property="passWord"/>
+	    <result column="name" property="name"/>
+	    <result column="is_deleted" property="isDeleted"/>
+	    <result column="create_time" property="createTime"/>
+	</resultMap>
    
   	 <!--  查询所有用户list-->
 	<select id="getAllUsers"  resultMap="UserResultMap">    
-	      select * from s_user   
+	      select * from sys_user
 	</select> 
 	
 	<!-- 根据用户名userName，查询用户 -->
 	<select id="getUserByUserName" resultMap="UserResultMap" parameterType="java.lang.String" >  
-	    SELECT * FROM s_user  WHERE user_name = #{userName}  
+	    SELECT * FROM sys_user  WHERE user_name = #{userName}
  	</select>  
  	
 </mapper>

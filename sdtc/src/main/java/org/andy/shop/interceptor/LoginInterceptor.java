@@ -3,8 +3,7 @@ package org.andy.shop.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.andy.shop.model.User;
+import org.andy.shop.model.SysUser;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 /**
@@ -47,9 +46,9 @@ public class LoginInterceptor implements HandlerInterceptor{
 		
         //获取Session，当前会话
         HttpSession session = request.getSession();  
-        User user = (User) session.getAttribute("user");  
+        SysUser sysUser = (SysUser) session.getAttribute("user");
         //当前用户登录，返回true
-        if(user != null){  
+        if(sysUser != null){
             return true;  
         }  
         //不符合条件的，跳转到登录界面  ，进行登录
